@@ -1,0 +1,23 @@
+# Settings shared by every profile. Environment-specific values live in application-{profile}.yml.
+spring:
+  application:
+    name: spring-boot-template
+  profiles:
+    # Running locally without SPRING_PROFILES_ACTIVE uses dev; deployments must set it to prod.
+    default: dev
+  jpa:
+    # Disabled so lazy-loading outside a transaction fails loudly instead of firing hidden queries in the view layer.
+    open-in-view: false
+    hibernate:
+      # Flyway owns the schema; Hibernate only verifies that entities match it.
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
